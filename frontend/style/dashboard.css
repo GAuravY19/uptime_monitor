@@ -1,0 +1,61 @@
+body {
+    background: #f8f9fa;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+.form-control {
+    border-radius: 8px;
+}
+
+.btn {
+    width: 120px;
+    border-radius: 8px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    gap: 8px;
+}
+
+.dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+}
+
+.green {
+    background: #16a34a;
+}
+
+.red {
+    background: #dc3545;
+}
+
+.positive {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.negative {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table th {
+    white-space: nowrap;
+}
