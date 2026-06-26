@@ -106,42 +106,61 @@ Stores monitoring history.
 
 ---
 
-# Running the Project
+## Running the Project
 
-## Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Configure Environment
-
-Create a `.env` file inside the `backend` folder.
-
-Example:
-
-```env
-DB_HOST=localhost
-DB_PORT=5433
-DB_NAME=uptime_monitor
-DB_USER=postgres
-DB_PASSWORD=your_password
-```
-
----
-
-## Start the Application
+### 1. Clone the Repository
 
 ```bash
-uvicorn main:app --reload
+git clone https://github.com/GAuravY19/uptime_monitor.git
+cd .\uptime_monitor\
 ```
 
-Open
+### 2. Configure Environment Variables
+
+A Google Drive link containing the required `.env` file will be shared via email.
+
+* Download the `.env` file.
+* Place it in the following directory:
 
 ```
-http://127.0.0.1:8000
+backend/.env
+```
+
+### 3. Build and Start the Application
+
+Run the following command from the project root:
+
+```bash
+docker compose up --build
+```
+
+This will:
+
+* Build the Docker image.
+* Install all required dependencies.
+* Start the FastAPI application.
+* Launch the background website monitoring scheduler.
+
+### 4. Access the Application
+
+Once the containers are running successfully, open your browser and navigate to:
+
+```
+http://localhost:8000
+```
+
+### 5. Stop the Application
+
+To stop the application, press:
+
+```text
+Ctrl + C
+```
+
+or, if running in detached mode:
+
+```bash
+docker compose down
 ```
 
 ---
