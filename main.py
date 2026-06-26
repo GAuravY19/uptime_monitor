@@ -25,6 +25,6 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-app.mount("/style", StaticFiles(directory="Frontend/style"), name="style")
+app.mount("/style", StaticFiles(directory="frontend/style"), name="style")
 
 app.include_router(router)

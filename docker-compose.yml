@@ -1,0 +1,38 @@
+services:
+
+  postgres:
+
+    image: postgres:17
+
+    container_name: uptime_postgres
+
+    restart: always
+
+    environment:
+      POSTGRES_DB: uptime_monitor
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  fastapi:
+
+    build: .
+
+    container_name: uptime_monitor
+
+    depends_on:
+      - postgres
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - backend/.env
+
+volumes:
+  postgres_data:
