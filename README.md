@@ -51,9 +51,9 @@ The application allows users to register websites for monitoring. A background s
 project/
 │
 ├── Frontend/
-│   ├── index.html
+│   ├── dashboard.html
 │   └── style/
-│       └── style.css
+│       └── dashboard.css
 │
 ├── backend/
 │   ├── crud.py
