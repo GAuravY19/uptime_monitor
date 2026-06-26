@@ -11,7 +11,7 @@ from datetime import datetime
 router = APIRouter()
 
 # Location of index.html
-templates = Jinja2Templates(directory="Frontend")
+templates = Jinja2Templates(directory="frontend")
 
 
 @router.get("/")

@@ -19,6 +19,7 @@ services:
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./db_create.sql:/docker-entrypoint-initdb.d/db_create.sql
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d uptime_monitor"]
