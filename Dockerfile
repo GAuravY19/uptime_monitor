@@ -1,28 +1,25 @@
-
-# Base Image
+# Use Python 3.12 Slim Image
 FROM python:3.12-slim
 
-# Prevent Python from writing .pyc files
+# Environment Variables
 ENV PYTHONDONTWRITEBYTECODE=1
-
-# Print logs immediately
 ENV PYTHONUNBUFFERED=1
 
-# Working Directory
-WORKDIR /uptime_monitor
+# Create Working Directory
+WORKDIR /app
 
-# Copy requirements first (Docker cache optimization)
+# Copy requirements first
 COPY requirements.txt .
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Upgrade pip and install dependencies
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-# Copy project
+# Copy application source
 COPY . .
 
 # Expose FastAPI Port
 EXPOSE 8000
 
-# Run FastAPI
+# Start FastAPI
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-

@@ -222,7 +222,8 @@ def get_all_websites():
         cursor.execute("""
             SELECT
                 web_id,
-                web_name
+                web_name,
+                web_url
             FROM website_listing
             ORDER BY web_name;
         """)
