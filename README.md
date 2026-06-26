@@ -165,23 +165,99 @@ docker compose down
 
 ---
 
-# Monitoring Logic
+## Verification Guide
 
-Each monitored website is checked every minute.
+To verify the uptime monitoring logic, use the following test cases after starting the application.
 
-The monitoring rules are:
+### Step 1: Start the Application
 
-* HTTP 2xx → UP
-* HTTP 3xx → UP
-* HTTP 4xx → UP
-* HTTP 5xx → DOWN
-* Timeout / DNS Failure / Connection Error → DOWN
+Run the FastAPI application and ensure the scheduler is active.
 
-Response Difference is calculated as:
+Open the dashboard:
 
+```text
+http://127.0.0.1:8000
 ```
-Current Response Time − Previous Response Time
+
+---
+
+### Step 2: Register a Healthy Website
+
+Add the following website:
+
+| Name    | URL                 |
+| ------- | ------------------- |
+| Google | https://www.google.com/ |
+| Flipkart | https://www.flipkart.com/ |
+| Meesho | https://www.meesho.com/ |
+
+Expected Result:
+
+* Status → **UP**
+* HTTP Status Code → **200**
+* Response Time → A numeric value (e.g., 120 ms)
+* Response Difference → Calculated after the second monitoring cycle
+
+---
+
+### Step 3: Register an Unreachable Website
+
+Add an invalid or unreachable URL, for example:
+
+| Name    | URL                                  |
+| ------- | ------------------------------------ |
+| Det | https://doing.com/ |
+
+Expected Result:
+
+* Status → **DOWN**
+* HTTP Status Code → --
+* Response Time → --
+* Response Difference → --
+
+---
+
+### Step 4: Wait for Scheduler
+
+The monitoring scheduler executes every **60 seconds**.
+
+After one monitoring cycle, the dashboard automatically refreshes and displays the latest monitoring results.
+
+---
+
+### Expected Behaviour
+
+Healthy website:
+
+```text
+Status          : UP
+HTTP Code       : 200
+Response Time   : X ms
 ```
+
+Unreachable website:
+
+```text
+Status          : DOWN
+HTTP Code       : --
+Response Time   : --
+```
+
+---
+
+### HTTP Status Handling
+
+The monitoring logic follows these rules:
+
+| HTTP Response                            | Status |
+| ---------------------------------------- | ------ |
+| 2xx                                      | UP     |
+| 3xx                                      | UP     |
+| 4xx                                      | UP     |
+| 5xx                                      | DOWN   |
+| Timeout / DNS Failure / Connection Error | DOWN   |
+
+This allows the application to distinguish between a reachable server returning an application error (5xx) and a completely unreachable endpoint.
 
 ---
 
