@@ -108,6 +108,8 @@
                                 <th>Name</th>
                                 <th>URL</th>
                                 <th>Status</th>
+                                <th>Status Code</th>
+
                                 <th>Response</th>
                                 <th>Time</th>
                                 <th>Response Difference</th>
@@ -272,6 +274,16 @@
                 <td>${record.url}</td>
 
                 <td>${statusHTML}</td>
+
+                <td>
+
+                    ${
+                        record.status_code == null
+                        ? "--"
+                        : record.status_code
+                    }
+
+                </td>
 
                 <td>${responseTime}</td>
 

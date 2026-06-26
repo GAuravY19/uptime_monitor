@@ -73,6 +73,7 @@ def insert_tracking(
         web_id,
         url,
         status,
+        status_code,
         response_time,
         response_difference
 ):
@@ -89,20 +90,24 @@ def insert_tracking(
             """
             INSERT INTO website_tracking
             (
+
                 web_id,
                 url,
                 status,
+                status_code,
                 response_time_ms,
                 response_difference
+
             )
 
             VALUES
-            (%s,%s,%s,%s,%s)
+            (%s,%s,%s,%s,%s,%s)
             """,
             (
                 web_id,
                 url,
                 status,
+                status_code,
                 response_time,
                 response_difference
             )
@@ -151,6 +156,7 @@ def get_recent_tracking(web_id=None, limit=30):
 
                     wt.url,
                     wt.status,
+                    wt.status_code,
                     wt.response_time_ms,
                     wt.hit_timestamp,
                     wt.response_difference

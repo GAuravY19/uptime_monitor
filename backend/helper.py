@@ -38,16 +38,8 @@ def generate_web_id():
         conn.close()
 
 
-def hit_website(url: str):
-    """
-    Hits the given URL and returns
 
-    Returns:
-        (
-            status,
-            response_time_ms
-        )
-    """
+def hit_website(url: str):
 
     try:
 
@@ -55,24 +47,30 @@ def hit_website(url: str):
 
         response = requests.get(
             url,
-            timeout=10
+            timeout=10,
+            allow_redirects=True
         )
 
         end = time.perf_counter()
 
         response_time = round((end - start) * 1000)
 
-        if response.status_code < 400:
+        status_code = response.status_code
+
+        if status_code < 500:
             status = "UP"
         else:
             status = "DOWN"
+            response_time = None
 
     except requests.exceptions.RequestException:
 
         status = "DOWN"
+        status_code = None
         response_time = None
 
     return (
         status,
-        response_time
+        response_time,
+        status_code
     )

@@ -22,7 +22,7 @@ def monitor_websites():
             web_id = website["web_id"]
             url = website["web_url"]
 
-            status, current_response = hit_website(url)
+            status, current_response, status_code = hit_website(url)
 
             previous_response = get_previous_response(web_id)
 
@@ -40,11 +40,19 @@ def monitor_websites():
                 )
 
             insert_tracking(
+
                 web_id=web_id,
+
                 url=url,
+
                 status=status,
+
+                status_code=status_code,
+
                 response_time=current_response,
+
                 response_difference=response_difference
+
             )
 
         print("Cycle Completed")
